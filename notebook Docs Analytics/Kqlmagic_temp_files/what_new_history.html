@@ -1,0 +1,337 @@
+<h1>HISTORY</h1>
+<h2>Version 0.1.108</h2>
+<ul>
+<li>
+<h3>New help information</h3>
+<ul>
+<li>help on how to enable logging. try %kql --help "logging"</li>
+</ul>
+</li>
+<li>
+<h3>Fix</h3>
+<ul>
+<li>Fixed KQLMAGIC_CONNECTION_STR missing options bug</li>
+<li>Fixed missing Orca bug</li>
+<li>Fixed deep linking bug</li>
+<li>Fixed faq display bug</li>
+</ul>
+</li>
+</ul>
+<h2>Version 0.1.107</h2>
+<ul>
+<li>
+<h3>New feature - request headers tagging</h3>
+<ul>
+<li>Enables to tag <strong>x-ms-app</strong>, <strong>x-ms-user</strong> and <strong>x-ms-client-request-id</strong> request headers with a custom string.</li>
+<li>To get more information execute: ```%kql --help 'request-tags'</li>
+</ul>
+</li>
+<li>
+<h3>New help information</h3>
+<ul>
+<li>help on how to tag request headers. try %kql --help "request-tags"</li>
+<li>Started a FAQ page. try %kql --faq</li>
+</ul>
+</li>
+</ul>
+<h2>Version 0.1.106</h2>
+<ul>
+<li>
+<h3>New support for Azure Data Explorer Client Request Properties</h3>
+<ul>
+<li>Many client request properties can be set using the set operator, as part of the query.
+However, some properties can be set only in the request.</li>
+<li>To set client request properties in the request, use the same syntax as kqlmagic options, but instead of using the '-' prefix use the '+' as prefix.</li>
+<li>example: %kql +servertimeout='30m' {your-query}</li>
+<li>
+<p>Client request properties can also be set by using the query_properties option. It should be set as a dictionary with the properties values.</p>
+</li>
+<li>
+<p>to see the full list of the client request properties try %kql --help "client-request-properties"</p>
+</li>
+</ul>
+</li>
+<li>
+<h3>New help information</h3>
+<ul>
+<li>help on how to use Kqlmagic behind proxies. try %kql --help "proxies"</li>
+<li>help on how to use Client Request Properties, and properties list. try %kql --help "client-request-properties"</li>
+<li>help on installing Kqlmagic. try %kql --help "kqlmagic-install"</li>
+<li>help to quick access Kqlmagic source. opens Kqlmagic github. try %kql --help "kqlmagic-github"</li>
+<li>help to quick access Kqlmagic readme. Opens Kqlmagic readme file. try %kql --help "kqlmagic-readme"</li>
+<li>help to quick access Kqlmagic license. Opens Kqlmagic license file. try %kql --help "kqlmagic-license"</li>
+<li>help to quick access Kqlmagic contributors list. Opens Kqlmagic contributors file. try %kql --help "kqlmagic-contributors"</li>
+</ul>
+</li>
+<li>
+<h3>Fix</h3>
+<ul>
+<li>allow file names with spaces</li>
+</ul>
+</li>
+</ul>
+<h2>Version 0.1.105</h2>
+<ul>
+<li>
+<h3>New device_code login notification options</h3>
+<ul>
+<li>device_code login notification for device_code authentication.</li>
+<li>Notification can be sent to 'frontend', 'terminal', 'browser' and 'email'</li>
+<li>note: the 'browser' will open on the ipykernel server.</li>
+<li>
+<p>note: for email option to work, device_code_notification_email option have to be set too.</p>
+</li>
+<li>
+<p><strong>device_code_login_notification</strong> (default: <strong>"frontend"</strong>, Abbreviation: dcln)</p>
+<ul>
+<li>Specifies device_code login notification method</li>
+<li><strong>"frontend"</strong> - displays a message with device code, and a button that when clicked opens an authentication page in the frontend browser.</li>
+<li><strong>"terminal"</strong> - displays a message with device code and link to the authentication page.</li>
+<li><strong>"browser"</strong> - displays a message with device code, and open an authentication page in a webbrowse on the ipykernel host.</li>
+<li><strong>"email"</strong> - send an email with device code and link to the authencitaion page.</li>
+</ul>
+</li>
+<li>
+<p><strong>device_code_notification_email</strong> (default: <strong>''</strong>, Abbreviation: dcne)</p>
+<ul>
+<li>Email details string. initialized by environmental variable KQLMAGIC_DEVICE_CODE_NOTIFICATION_EMAIL.</li>
+<li>The email details string format: SMTPEndPoint='endpoint';SMTPPort='port';sendFrom='email';sendFromPassword='password';sendTo='email';context='text'</li>
+<li>note: context text is optional, is a free text that will be added to the email subject and email body.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3>New deep_link method in result object</h3>
+<ul>
+<li>deep_link method opens query link tool provided as a parameter or the default tool as set in query_link_destination option, and execute the query in the tool.</li>
+<li>note: see <strong>show_query_link</strong> and <strong>query_link_destination</strong> options</li>
+<li>note: supported only for Azure Data Explorer queries, will be ignored for Application Insights or Log Analytics queries</li>
+<li>for example:</li>
+</ul>
+<p><em><em>kql_raw_result</em>.deep_link()</em>                    # will launch the default deep link tool and execute the query in the tool.</p>
+<p><em><em>kql_raw_result</em>.deep_link("Kusto.WebExplorer")</em> # will launch Kusto.WebExplorer and execute the query in Kusto.WebExplorer.</p>
+<p><em><em>kql_raw_result</em>.deep_link("Kusto.Explorer")</em>    # will launch Kusto.Explorer and execute the query in Kusto.Explorer.</p>
+</li>
+<li>
+<h3>query errors displayed in pretty json</h3>
+<ul>
+<li>Show query errors in pretty json for better read.</li>
+</ul>
+</li>
+</ul>
+<h2>Version 0.1.104</h2>
+<ul>
+<li>Fix import missing FernetCrypto</li>
+</ul>
+<h2>Version 0.1.103</h2>
+<ul>
+<li>
+<h3>New message appended to init banner</h3>
+<ul>
+<li>A what's new message with a 'what' new' button.</li>
+<li>When clicked a window is opened with all Kqlmagic release notes history.</li>
+</ul>
+</li>
+<li>
+<h3>New init options (on Kqlmagic load) that can be set by environment variable KQLMAGIC_CONFIGURATION</h3>
+<ul>
+<li><strong>check_magic_version</strong> (default <strong>True</strong>):</li>
+<li>
+<p>On Kqlmagic load, check whether new version of Kqlmagic exist, and add a notification message to init banner if a new version exist</p>
+</li>
+<li>
+<p><strong>show_what_new</strong> (default <strong>True</strong>):</p>
+</li>
+<li>
+<p>On Kqlmagic load, loads history file of Kqlmagic from repository, and adds a "what's new" button to open it in a window.</p>
+</li>
+<li>
+<p><strong>show_init_banner</strong> (default <strong>True</strong>):</p>
+</li>
+<li>On Kqlmagic load, show init banner</li>
+</ul>
+</li>
+<li>
+<h3>New query options</h3>
+<ul>
+<li><strong>show_query_link</strong> (default <strong>False</strong>, abbreviation sql):</li>
+<li>
+<p>Add query deep link button after query result, clicking the button will open the tool (see query_link_destination option) and execute the query in the tool.</p>
+<ul>
+<li>note: supported only for Azure Data Explorer queries, will be ignored for Application Insights or Log Analytics queries</li>
+</ul>
+</li>
+<li>
+<p><strong>query_link_destination</strong>  (default <strong>"Kusto.WebExplorer"</strong>, abbreviation qld):</p>
+</li>
+<li>Specifies the destination of the query link tool (see show_query_link option)<ul>
+<li>note: only two Azure Data Explorer tools are supported <strong>"Kusto.WebExplorer"</strong> and <strong>"Kusto.Explorer"</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3>New plot package supported</h3>
+<ul>
+<li><strong>"plotly_orca"</strong> was added to <strong>plot_package</strong> option (default <strong>"plotly"</strong>):</li>
+<li>Generates the plot as png image (useful for static front ends)</li>
+<li>
+<p>note: requires plotly orca to be installed in the backend server.</p>
+</li>
+<li>
+<p><strong>"None"</strong> was added to <strong>plot_package</strong> option (default <strong>"plotly"</strong>):</p>
+</li>
+<li>disable plot, table is returned</li>
+</ul>
+</li>
+</ul>
+<h2>Version 0.1.102</h2>
+<ul>
+<li>
+<h3>New query options</h3>
+<ul>
+<li>
+<p><strong>show_query</strong> (default False, abbreviation sq):</p>
+</li>
+<li>
+<p>Add parametrized query message before query results.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Version 0.1.101</h2>
+<ul>
+<li>
+<h3>support Souvereign Clouds</h3>
+<ul>
+<li>Supports <strong>"public"</strong>, <strong>"mooncake"</strong>, <strong>"fairfax"</strong>, <strong>"blackforest"</strong>, <strong>"usnat"</strong>, <strong>"ussec"</strong>, <strong>"test"</strong> clouds.</li>
+</ul>
+</li>
+<li>
+<h3>New query options</h3>
+<ul>
+<li><strong>cloud</strong>  (default <strong>"public"</strong>, other: [ <strong>"public"</strong>, <strong>"mooncake"</strong>, <strong>"fairfax"</strong>, <strong>"blackforest"</strong>, <strong>"usnat"</strong>, <strong>"ussec"</strong>, <strong>"test"</strong>]):</li>
+<li>
+<p>Specifies the cloud to be used when a new connection is created</p>
+</li>
+<li>
+<p><strong>data-source-url</strong></p>
+</li>
+<li>
+<p>Override the cloud default data source url</p>
+</li>
+<li>
+<p><strong>aad-url</strong></p>
+</li>
+<li>Override the cloud default aad login url<ul>
+<li>note: only two Azure Data Explorer tools are supported <strong>"Kusto.WebExplorer"</strong> and <strong>"Kusto.Explorer"</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<h3>Connection string enhanced</h3>
+<ul>
+<li><strong>clientId</strong></li>
+<li>Client id can be specified in all connection string variation to override the default clientId</li>
+</ul>
+</li>
+</ul>
+<h2>Version &lt;= 0.1.100</h2>
+<ul>
+<li>Fixed nbsp; bug + allow multiple options in connection string Aug 12, 2019</li>
+<li>Adding support to plotly version 4 Jul 21, 2019</li>
+<li>Adding another test Jul 21, 2019</li>
+<li>Changed testing framework from nose to pytest Jun 3, 2019</li>
+<li>Update setup module versions Jun 3, 2019</li>
+<li>Version 0.96 - added queryproperties option and "+" specific query properties for Kusto queries (supports all set customers properties) </li>
+<li>fix query caching  to support non standard database names; support separate logging; log Kqlmagic steps; log requests; log adal request; add env KQLMAGIC [-LOG_LEVEL, _LOG_FILE, _LOG_FILE_PREFIX, _LOG_FILE_MODE]; add experimental sso, to enable KQLMAGIC_ENABLE_SSO=TRUE; fix parametrized dataframe types long and real; - 0.1.95 - Apr 06, 2019</li>
+<li>fix http://kusto.aria.microsoft.com and other not standard cluster name </li>
+<li>fix missing lxml.py module dependency in setup.py; created history.rst file; updated setup.py based on azure notebooks image - 0.1.93 - Mar 24, 2019</li>
+<li>support database names with whitespaces; support ADX proxy over AI/LA cluster names; fix charts based on firest quantity column - 0.1.92 - Mar 18, 2019</li>
+<li>allow v1 response from kusto api v2, support adx-proxy, - 0.1.91 - Feb 20, 2019</li>
+<li>fix to_dataframe bool - 0.1.90 - Jan 25, 2019</li>
+<li>update binder requirements to 0.1.88 - Jan 16, 2019</li>
+<li>version 01.88, added --schema command - 0.1.88 - Jan 16, 2019</li>
+<li>added test_notebook_app for testing, , commands instead of show_window return html object result. - 0.1.87 - Dec 25, 2018</li>
+<li>added run_upgrade.bat; enhanced run_tests.bat - Dec 24, 2018</li>
+<li>fixed run_tests.bat - fixed run_tests.bat - Dec 20, 2018</li>
+<li>update binder requirements - update binder requirements - Dec 20, 2018</li>
+<li>Adjusted to support VisualStudioCode (Jupyter) notebook - 0.1.86 - Dec 18, 2018</li>
+<li>added support to "ipython" notebook_app, started a tests suits - 0.1.85 - Dec 17, 2018</li>
+<li>update binder requirements to 0.1.84 - Dec 16, 2018</li>
+<li>Fix dynamic columns that are not strict json - 0.1.84 - Dec 11, 2018</li>
+<li>Align to Kusto new V2 dynamic field response; fix kql.submit() - 0.1.83 - Dec 10, 2018</li>
+<li>binder to use 0.1.82 - Dec 9, 2018</li>
+<li>added binder folder, with requirements - Dec 9, 2018</li>
+<li>fixed env KQLMAGIC_CONNECTION_STR - 0.1.82 - Dec 6, 2018</li>
+<li>update notebooks with anonymous authentication - Dec 3, 2018</li>
+<li>removed tell_format; added anonymous authentication (for the case of local data source) - 0.1.81 - Dec 3, 2018</li>
+<li>Removed dependency on azure.kusto sdk, use rest api to kusto. - 0.1.80 - Nov 13, 2018</li>
+<li>changed cache management via commands, modified caches to be named, added option -save_to folder,; support datetime as linear value in charts, support kql render attributes; support fully qualified cluster; prepare to remove kusto sdk - 0.1.79 - Nov 13, 2018</li>
+<li>support query option -timout / -wait / -to in seconds - 0.1.78 - Nov 8, 2018</li>
+<li>fix popup for clusters or databases with special characters, fix .ingest online, version - 0.1.77 - Nov 8, 2018</li>
+<li>restrict Kqlmagic to python &gt;= 3.6 - 0.1.76 - Nov 8, 2018</li>
+<li>support command --help without params - 0.1.75 - Nov 7, 2018</li>
+<li>version 0.1.74 - 0.1.74 - Nov 7, 2018</li>
+<li>support .show database DB schema as json - Nov 7, 2018</li>
+<li>fix parametrization of df column of type object but is actually bytes 0.1.73 - 0.1.73 - Nov 5, 2018</li>
+<li>fixed parametrizaton to .set management queries, fixed javascript error when old out cell displays - 0.1.72 - Nov 5, 2018</li>
+<li>prepare support all visualization properties - 0.1.71 - Nov 3, 2018</li>
+<li>minor changes in readme and help - Oct 31, 2018</li>
+<li>support pandas dataframe as parameter, add support null values in conversion to dataframes, fixed pretty print of dynamic cols; improved parametrization. - 0.1.70 - Oct 31, 2018</li>
+<li>make keys as caseinsensitive, ignore underscore and hyphen-minus, covert some options to commands, modify kusto kql logo, and remove kusto name. 0.1.69 - 0.1.69 - Oct 29, 2018</li>
+<li>fix clors notebook - Oct 25, 2018</li>
+<li>popup_window option to all commands, fixed banner, update notebooks, 0.1.68 - 0.1.68 - Oct 25, 2018</li>
+<li>update notebooks with --version,; allow =setting in options, more quotes flexibility with values, support option dict type; - 0.1.67 - Oct 25, 2018</li>
+<li>support partial result, add command concept, added commands, 0.1.66 - 0.1.66 - Oct 25, 2018</li>
+<li>options and connection key values can be parametyrize from python and env variables, new -query and -conn option - 0.1.65 - Oct 23, 2018</li>
+<li>parametrized options, add file://folder, update color notebook, 0.1.64 - 0.1.64 - Oct 22, 2018</li>
+<li>fix notebooks - Oct 22, 2018</li>
+<li>run black on code, version 0.1.63 - 0.1.63 - Oct 22, 2018</li>
+<li>bug fix, code refactor, version 0.1.62 - 0.1.62 - Oct 21, 2018</li>
+<li>moved the saved_as earlier in the pipe, to capture raw results even if there is an error later. version 0.1.61 - 0.1.61 - Oct 20, 2018</li>
+<li>fix to pandas convertion, for the case of missing int64 or missing bool, version 0.1.60 - 0.1.60 - Oct 18, 2018</li>
+<li>update notebooks, added support to certificate pem_file, version 0.1.59 - 0.1.59 - Oct 18, 2018</li>
+<li>restructure local files - Oct 18, 2018</li>
+<li>Update notebooks, created QuikStart fro log analytics notebook, updated README, version 0.1.58 - 0.1.58 - Oct 18, 2018</li>
+<li>update notebooks - Oct 18, 2018</li>
+<li>update notebooks - Oct 18, 2018</li>
+<li>update notebooks with new connection string format - Oct 18, 2018</li>
+<li>Fixed setup.py long description to show properly work on PyPI - 0.1.57 -  Oct 17, 2018</li>
+<li>removed setup dwonload_url - Oct 17, 2018</li>
+<li>update setup description and README titles - Oct 17, 2018</li>
+<li>update README - Oct 17, 2018</li>
+<li>update README - Oct 17, 2018</li>
+<li>update README - Oct 17, 2018</li>
+<li>updated README, and setup - 0.1.56 - Oct 17, 2018</li>
+<li>fix setup.py - fix setup.py</li>
+<li>removed version restriction on traitlets - 0.1.55 - Oct 17, 2018</li>
+<li>removed psutil version restriction in setup - 0.1.54 - Oct 17, 2018</li>
+<li>fixed pallette notebook; adjuset to azure-kusto-data version 0.0.15 changes (tenant is a must parameter, for clienid) - 0.1.53 - Oct 16, 2018</li>
+<li>Fixed development status, updated setup, version 0.1.52 - 0.1.52 - Oct 16, 2018</li>
+<li>changes state from 1-alpha to 3-beta; published in PyPI; modified notebooks to reflect the changes; changed structure of files. Version 0.1.50 - 0.1.50 -  Oct 16, 2018</li>
+<li>support alt schema names; simplify code; improve connection inheritance; ; added warning to upgrade version with PyPI; added alias to connection string; added alias_magics 'adxql'; - 0.1.47 - Oct 15, 2018</li>
+<li>removed order restriction on connection string, simplified and unified connections string code parsing, improved error presentation, added friendly_ to connection string (for case id is a uuid) - 0.1.46 - Oct 10, 2018</li>
+<li>AAD Authentication Code() and Clientid/Clientsecret, added to ApplicationInsights and Loganalytics - 0.1.45 - Oct 9, 2018</li>
+<li>add aad auth support for lognalytics and applicationinsights; simplified code - 0.1.44 - Oct 8, 2018</li>
+<li>support getting generic database schema from all engines - 0.1.43 - Oct 7, 2018</li>
+<li>fixed fork charts, adjusted to work on Jupyter Lab - 0.1.42 - Oct 7, 2018</li>
+<li>fixed linechart and timechart multidimetional and not sorted, and not ordered, 0.1.41 - 0.1.41 - Oct 4, 2018</li>
+<li>bump version 0.1.40</li>
+<li>bump 0.1.39</li>
+<li>fix results.py -  Oct 3, 2018</li>
+<li>bump version 0.1.38</li>
+<li>patch to support plotly in Azure notebook, till it will support plotly MIME - Oct 3, 2018</li>
+<li>comment local usage - Oct 3, 2018</li>
+<li>add ParametrizeYourQuery notebook - Oct 3, 2018</li>
+<li>added parametrization feature, added saved_as option, added params_dict option, fixed options validation, added parametrized_query attribute to results object, updated setup.py - 0.1.37 - Sep 30, 2018</li>
+<li>simplified code, fixed cahing schema - 0.1.36 - Sep 24, 2018</li>
+<li>Fixed timespan - 0.1.35 - Sep 23, 2018</li>
+<li>fixed ref to github - Sep 20, 2018</li>
+<li>Added copyright file header to all files, version 0.1.34 - 0.1.34 - Sep 20, 2018</li>
+<li>fix notebooks - 0.1.33 - Sep 19, 2018</li>
+<li>fix setup.py - 0.1.32 - Sep 19, 2018</li>
+<li>bump version - 0.1.31 - Sep 19, 2018</li>
+</ul>
